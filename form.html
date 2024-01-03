@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home Questionnaire<span id="selection-marker-1" class="redactor-selection-marker"></span></title>
+    <script>
+        ! function() {
+            var analytics = window.analytics = window.analytics || [];
+            if (!analytics.initialize)
+                if (analytics.invoked) window.console && console.error && console.error("Segment snippet included twice.");
+                else {
+                    analytics.invoked = !0;
+                    analytics.methods = ["trackSubmit", "trackClick", "trackLink", "trackForm", "pageview", "identify", "reset", "group", "track", "ready", "alias", "debug", "page", "once", "off", "on"];
+                    analytics.factory = function(t) {
+                        return function() {
+                            var e = Array.prototype.slice.call(arguments);
+                            e.unshift(t);
+                            analytics.push(e);
+                            return analytics
+                        }
+                    };
+                    for (var t = 0; t < analytics.methods.length; t++) {
+                        var e = analytics.methods[t];
+                        analytics[e] = analytics.factory(e)
+                    }
+                    analytics.load = function(t, e) {
+                        var n = document.createElement("script");
+                        n.type = "text/javascript";
+                        n.async = !0;
+                        n.src = ("https:" === document.location.protocol ? "https://" : "http://") + "cdn.segment.com/analytics.js/v1/" + t + "/analytics.min.js";
+                        var o = document.getElementsByTagName("script")[0];
+                        o.parentNode.insertBefore(n, o);
+                        analytics._loadOptions = e
+                    };
+                    analytics.SNIPPET_VERSION = "4.1.0";
+                    analytics.load("Ptn5JylAqegn1RQEo7xEHs8iBOTH8tsE");
+                    analytics.page();
+                }
+        }();
+    </script>
+</head>
+
+<body>
+    <h1>Segment University</h1>
+    <p>Sources Demo -- Form Submission</p>
+    <form name="form" onsubmit="identify(event)">
+        <br><br><br> 
+        <br><br> Name: <input name="fullname" size="75" type="text" />
+        <br><br> Age: <input name="age" size="75" type="text" />
+        <br><br> Gender: <input name="gender" size="75" type="text" />
+        <br><br> Email: <input name="email" size="75" type="email" />
+        <br><br> Job Title: <input name="title" size="75" type="text" />
+        <br><br> Company ID: <input name="comp_id" size="75" type="number" />
+        <br><br> Company Name: <input name="comp_name" size="75" type="text" />
+        <br><br> Phone: <input name="phone" size="75" type="text" />
+        <br><br> State: <input name="state" size="75" type="text" />
+        <br><br> Rating: <input name="rating" size="75" type="text" />
+        <br><br> Home City: <input name="home_city" size="75" type="text" />
+        <br><br> Home State: <input name="home_state" size="75" type="text" />
+        <br><br> Home Country: <input name="home_country" size="75" type="text" />
+        <br><br> Home Zip: <input name="home_zip" size="75" type="text" />
+        <br><br> Home Street: <input name="home_street" size="75" type="text" />
+        <br><br>Any other relevant info about your company?
+        <br><br>
+        <textarea cols="81" name="details" rows="10">
+    </textarea>
+        <br><br<br><input name="submit" type="submit" value="submit" />
+    </form>
+    <script type="text/javascript">
+        function identify(e) {
+            e.preventDefault();
+            var form = e.target;
+            var email = form["email"].value;
+            var title = form["title"].value;
+            var age = form["age"].value;
+            var gender = form["gender"].value;
+            var comp_id = form["comp_id"].value;
+            var comp_name = form["comp_name"].value;
+            var fullname = form["fullname"].value;
+            var phone = form["phone"].value;
+            var state = form["state"].value;
+            var rating = form["rating"].value
+            var details = form["details"].value;
+            var home_city = form["home_city"].value;
+            var home_zip = form["home_zip"].value;
+            var home_country = form["home_country"].value;
+            var home_street = form["home_street"].value;
+            var home_state = form["home_state"].value;
+            var rn = Math.floor((Math.random() * 1000000) + 1);
+            
+            analytics.identify(12345, {
+                email: email,
+                title: title,
+                age: age,
+                gender: gender,
+                leadSource: 'Newsletter',
+                is_first_session: 'true',
+                clicked_random_link: 'true',
+                viewed_product: 'true',
+                company: {
+                    id: comp_id,
+                    name: comp_name
+                },
+                name: fullname,
+                category: 'Marketing',
+                phone: phone,
+                state: state,
+                rating: rating,
+                address: {
+                    city: home_city,
+                    postalCode: home_zip,
+                    country: home_country,
+                    street: home_street,
+                    state: home_state
+                }
+            }, {
+                'integrations': {
+                    'Salesforce': true
+                }
+            });
+
+            analytics.track('Form Submitted', {
+                type: "Lead Generation",
+            });
+
+        }
+    </script>
+</body>
+
+</html>

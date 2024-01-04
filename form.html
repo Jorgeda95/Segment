@@ -58,7 +58,8 @@
             var home_state = form["home_state"].value;
             var rn = Math.floor((Math.random() * 1000000) + 1);
             
-            analytics.identify(12345, {
+            /* analytics.identify(12345, { */
+            analytics.identify(userId, {
                 email: email,
                 title: title,
                 age: age,

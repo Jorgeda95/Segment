@@ -15,6 +15,7 @@
     <form name="form" onsubmit="identify(event)">
         <br><br><br> 
         <br><br> Name: <input name="fullname" size="75" type="text" />
+        <br><br> Apellidos: <input apellidos="apellidos" size="75" type="text" />
         <br><br> Age: <input name="age" size="75" type="text" />
         <br><br> Gender: <input name="gender" size="75" type="text" />
         <br><br> Email: <input name="email" size="75" type="email" />
@@ -42,6 +43,7 @@
             var form = e.target;
             var email = form["email"].value;
             var title = form["title"].value;
+            var apellidos = form["apellidos"].value
             var age = form["age"].value;
             var gender = form["gender"].value;
             var comp_id = form["comp_id"].value;

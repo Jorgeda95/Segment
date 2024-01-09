@@ -41,19 +41,21 @@
 </head>
 
 <body>
-    <h1>Demo Segment3</h1>
-    <p>Sources Demo -- Form Submission</p>
+    <h1>Ejemplo Segment4</h1>
+    <p>Demostración de fuentes: envío de formulario (luego de dar click al submit revisar la plataforma de Segment)</p>
     <form name="form" onsubmit="identify(event)">
         <br><br><br> 
+        <!--Datos personales -->
         <br><br> Name: <input name="fullname" size="75" type="text" />
         <br><br> Edad: <input name="age" size="75" type="text" />
-        <br><br> Genero: <input name="gender" size="75" type="text" />
-        <br><br> Email: <input name="email" size="75" type="email" />
-        <br><br> DPI: <input name="dpi" size="75" type="text" />
-        <br><br> Job Title: <input name="title" size="75" type="text" />
-        <br><br> Company ID: <input name="comp_id" size="75" type="number" />
-        <br><br> Company Name: <input name="comp_name" size="75" type="text" />
         <br><br> Phone: <input name="phone" size="75" type="text" />
+        <br><br> Email: <input name="email" size="75" type="email" />
+        <br><br> Género: <input name="gender" size="75" type="text" />
+        <br><br> DPI: <input name="dpi" size="75" type="text" />
+        <!--Otros datos -->
+        <br><br> Puesto: <input name="title" size="75" type="text" />
+        <br><br> ID Empresa: <input name="comp_id" size="75" type="number" />
+        <br><br> Nombre Empresa: <input name="comp_name" size="75" type="text" />
         <br><br> State: <input name="state" size="75" type="text" />
         <br><br> Rating: <input name="rating" size="75" type="text" />
         <br><br> Home City: <input name="home_city" size="75" type="text" />
@@ -61,7 +63,7 @@
         <br><br> Home Country: <input name="home_country" size="75" type="text" />
         <br><br> Home Zip: <input name="home_zip" size="75" type="text" />
         <br><br> Home Street: <input name="home_street" size="75" type="text" />
-        <br><br>Any other relevant info about your company?
+        <br><br>¿Alguna otra información relevante sobre su empresa?
         <br><br>
         <textarea cols="81" name="details" rows="10">
     </textarea>
@@ -88,7 +90,6 @@
             var home_street = form["home_street"].value;
             var home_state = form["home_state"].value;
             var dpi = form["dpi"].value;
-            
             var rn = Math.floor((Math.random() * 1000000) + 1);
             
             analytics.identify(12345, {
@@ -96,8 +97,11 @@
                 title: title,
                 age: age,
                 gender: gender,
+                /*Identificación de Fuente de datos*/
                 leadSource: 'FormularioWeb',
                 EventoPromocion: 'formularioFlaminHotxGiraRefrescantegt',
+                EventoPaís: 'formulariogt',
+                EventoCategoria: 'formularioPepsiMusicgt',
                 is_first_session: 'true',
                 clicked_random_link: 'true',
                 viewed_product: 'true',
@@ -111,15 +115,16 @@
                 EventoPaís: 'formulariogt',
                 EventoCategoria: 'formularioPepsiMusicgt',
                 EventoPromocion: 'formularioFlaminHotxGiraRefrescantegt',
+                
                 phone: phone,
                 state: state,
                 rating: rating,
+                dpi: dpi,
                 address: {
                     city: home_city,
                     postalCode: home_zip,
                     country: home_country,
                     street: home_street,
-                    dpi: dpi,
                     state: home_state
                 }
             }, {

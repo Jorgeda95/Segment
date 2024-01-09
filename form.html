@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Ejemplo Web Foods<span id="selection-marker-1" class="redactor-selection-marker"></span></title>
+    <title>Ejemplo Web Segment<span id="selection-marker-1" class="redactor-selection-marker"></span></title>
     <script>
         ! function() {
             var analytics = window.analytics = window.analytics || [];
@@ -41,14 +41,15 @@
 </head>
 
 <body>
-    <h1>Segment University</h1>
+    <h1>Demo Segment </h1>
     <p>Sources Demo -- Form Submission</p>
     <form name="form" onsubmit="identify(event)">
         <br><br><br> 
         <br><br> Name: <input name="fullname" size="75" type="text" />
-        <br><br> Age: <input name="age" size="75" type="text" />
-        <br><br> Gender: <input name="gender" size="75" type="text" />
+        <br><br> Edad: <input name="age" size="75" type="text" />
+        <br><br> Genero: <input name="gender" size="75" type="text" />
         <br><br> Email: <input name="email" size="75" type="email" />
+        <br><br> DPI: <input name="dpi" size="75" type="text" />
         <br><br> Job Title: <input name="title" size="75" type="text" />
         <br><br> Company ID: <input name="comp_id" size="75" type="number" />
         <br><br> Company Name: <input name="comp_name" size="75" type="text" />
@@ -86,6 +87,8 @@
             var home_country = form["home_country"].value;
             var home_street = form["home_street"].value;
             var home_state = form["home_state"].value;
+            var dpi = form["dpi"].value;
+            
             var rn = Math.floor((Math.random() * 1000000) + 1);
             
             analytics.identify(12345, {
@@ -102,7 +105,11 @@
                     name: comp_name
                 },
                 name: fullname,
-                category: 'Marketing',
+                 /* Atributos no Visibles*/
+                category: 'PepsiMusic',
+                EventoPaís: "formulario_gt",
+                Evento Categoría: "formulario_PepsiMusic_gt",
+                Evento Promoción: "formulario_FlaminHotxGiraRefrescante_gt",
                 phone: phone,
                 state: state,
                 rating: rating,
@@ -111,6 +118,7 @@
                     postalCode: home_zip,
                     country: home_country,
                     street: home_street,
+                    dpi: dpi,
                     state: home_state
                 }
             }, {

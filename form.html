@@ -41,28 +41,30 @@
 </head>
 
 <body>
-    <h1>Ejemplo Segment4</h1>
-    <p>Demostración de fuentes: envío de formulario (luego de dar click al submit revisar la plataforma de Segment)</p>
+    <h1>Ejemplo Segment5</h1>
+    <h2>Demostración de fuentes: envío de formulario</h2>
+    <h3>Luego de dar click al submit revisar la plataforma de Segment</h3>
+    
     <form name="form" onsubmit="identify(event)">
         <br><br><br> 
         <!--Datos personales -->
-        <br><br> Name: <input name="fullname" size="75" type="text" />
+        <br><br> Nombre: <input name="fullname" size="75" type="text" />
         <br><br> Edad: <input name="age" size="75" type="text" />
-        <br><br> Phone: <input name="phone" size="75" type="text" />
+        <br><br> Teléfono: <input name="phone" size="75" type="text" />
         <br><br> Email: <input name="email" size="75" type="email" />
         <br><br> Género: <input name="gender" size="75" type="text" />
         <br><br> DPI: <input name="dpi" size="75" type="text" />
         <!--Otros datos -->
         <br><br> Puesto: <input name="title" size="75" type="text" />
-        <br><br> ID Empresa: <input name="comp_id" size="75" type="number" />
+        <br><br> Id Empresa: <input name="comp_id" size="75" type="number" />
         <br><br> Nombre Empresa: <input name="comp_name" size="75" type="text" />
-        <br><br> State: <input name="state" size="75" type="text" />
+        <br><br> Estado Empresa: <input name="state" size="75" type="text" />
         <br><br> Rating: <input name="rating" size="75" type="text" />
-        <br><br> Home City: <input name="home_city" size="75" type="text" />
-        <br><br> Home State: <input name="home_state" size="75" type="text" />
-        <br><br> Home Country: <input name="home_country" size="75" type="text" />
-        <br><br> Home Zip: <input name="home_zip" size="75" type="text" />
-        <br><br> Home Street: <input name="home_street" size="75" type="text" />
+        <br><br> Ciudad: <input name="home_city" size="75" type="text" />
+        <br><br> Estado: <input name="home_state" size="75" type="text" />
+        <br><br> País: <input name="home_country" size="75" type="text" />
+        <br><br> Zip: <input name="home_zip" size="75" type="text" />
+        <br><br> Dirección: <input name="home_street" size="75" type="text" />
         <br><br>¿Alguna otra información relevante sobre su empresa?
         <br><br>
         <textarea cols="81" name="details" rows="10">
@@ -93,29 +95,11 @@
             var rn = Math.floor((Math.random() * 1000000) + 1);
             
             analytics.identify(12345, {
+                name: fullname,
                 email: email,
                 title: title,
                 age: age,
                 gender: gender,
-                /*Identificación de Fuente de datos*/
-                leadSource: 'FormularioWeb',
-                EventoPromocion: 'formularioFlaminHotxGiraRefrescantegt',
-                EventoPaís: 'formulariogt',
-                EventoCategoria: 'formularioPepsiMusicgt',
-                is_first_session: 'true',
-                clicked_random_link: 'true',
-                viewed_product: 'true',
-                company: {
-                    id: comp_id,
-                    name: comp_name
-                },
-                name: fullname,
-                 /* Atributos no Visibles*/
-                category: 'PepsiMusic',
-                EventoPaís: 'formulariogt',
-                EventoCategoria: 'formularioPepsiMusicgt',
-                EventoPromocion: 'formularioFlaminHotxGiraRefrescantegt',
-                
                 phone: phone,
                 state: state,
                 rating: rating,
@@ -126,7 +110,23 @@
                     country: home_country,
                     street: home_street,
                     state: home_state
-                }
+                },
+
+                 company: {
+                    id: comp_id,
+                    name: comp_name
+                },
+                
+                is_first_session: 'true',
+                clicked_random_link: 'true',
+                viewed_product: 'true',
+               
+                 /* Atributos no Visibles*/
+                leadSource: 'FormularioWeb',
+                category: 'PepsiMusic',
+                EventoPaís: 'formulariogt',
+                EventoCategoria: 'formularioPepsiMusicgt',
+                EventoPromocion: 'formularioFlaminHotxGiraRefrescantegt'
             }, {
                 'integrations': {
                     'Salesforce': true

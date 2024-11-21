@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prueba Customerio<span id="selection-marker-1" class="redactor-selection-marker"></span></title>
+
+<script type="text/javascript">
+  var _cio = _cio || [];
+  (function() {
+    var a,b,c;a=function(f){return function(){_cio.push([f].
+    concat(Array.prototype.slice.call(arguments,0)))}};b=["load","identify",
+    "sidentify","track","page"];for(c=0;c<b.length;c++){_cio[b[c]]=a(b[c])};
+    var t = document.createElement('script'),
+        s = document.getElementsByTagName('script')[0];
+    t.async = true;
+    t.id    = 'cio-tracker';
+    t.setAttribute('data-site-id', '5635992565545a6c0313');
+    t.src = 'https://assets.customer.io/assets/track.js';
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+
+  
+</head>
+<body>
+    <h1>Prueba Segment</h1>
+    <p>Demo -- Form Submission</p>
+    <form name="form" onsubmit="identify(event)">
+        <br><br><br> 
+        <br><br> Name: <input name="fullname" size="75" type="text" />
+        <br><br> Age: <input name="age" size="75" type="text" />
+        <br><br> Gender: <input name="gender" size="75" type="text" />
+        <br><br> Email: <input name="email" size="75" type="email" />
+        <br><br> Job Title: <input name="title" size="75" type="text" />
+        <br><br> Company ID: <input name="comp_id" size="75" type="number" />
+        <br><br> Company Name: <input name="comp_name" size="75" type="text" />
+        <br><br> Phone: <input name="phone" size="75" type="text" />
+        <br><br> State: <input name="state" size="75" type="text" />
+        <br><br> Rating: <input name="rating" size="75" type="text" />
+        <br><br> Home City: <input name="home_city" size="75" type="text" />
+        <br><br> Home State: <input name="home_state" size="75" type="text" />
+        <br><br> Home Country: <input name="home_country" size="75" type="text" />
+        <br><br> Home Zip: <input name="home_zip" size="75" type="text" />
+        <br><br> Home Street: <input name="home_street" size="75" type="text" />
+        <br><br>Any other relevant info about your company?
+        <br><br>
+        <textarea cols="81" name="details" rows="10">
+    </textarea>
+        <input type="submit" value="Submit">
+<!--       <br><br<br><input name="submit" type="submit" value="submit" /> -->
+    </form>
+<script type="text/javascript">
+  _cio.identify({
+
+var email = form["email"].value;
+    // Required attributes
+    id: 'user@domain.com',    // Use either cio_id, id, or email.
+
+    // Strongly recommended attributes
+    created_at: 1339438758,   // Timestamp in your system that represents when
+                              // the user first signed up. You'll want to send it
+                              // as seconds since the epoch.
+
+    // Example attributes (you can name attributes what you wish)
+    email: email,
+    first_name: 'John',       // Add any attributes you'd like to use in the email subject or body.
+    last_name: 'Smith',       // First name and last name are shown on people pages.
+    plan_name: 'premium'      // To use the example segments, set this to 'free' or 'premium'.
+
+    
+  _cio.track("watchedIntroVideo");
+  _cio.track("purchased", { price: "23.45" });
+
+
+  });
+</script>
+
+</body>
+
+</html>

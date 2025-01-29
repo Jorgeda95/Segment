@@ -52,7 +52,14 @@
         <br><br> Gender: <input name="gender" size="75" type="text" required/>
         <br><br> Email: <input name="email" size="75" type="email" required/>
         <br><br> Phone: <input name="phone" size="75" type="text" required/>
-        <br><br> 
+        
+        <!-- Campos ocultos -->
+        <input class="wpcf7-form-control wpcf7-hidden" value="HinchaPepsi" type="hidden" name="Hide-category" />
+        <input class="wpcf7-form-control wpcf7-hidden" value="formularioGt" type="hidden" name="Hideflag-eventoPais" />
+        <input class="wpcf7-form-control wpcf7-hidden" value="formularioHinchaPepsiGt" type="hidden" name="Hideflag-eventoPromocion" />
+        <input class="wpcf7-form-control wpcf7-hidden" value="formularioEnviado" type="hidden" name="title" />
+
+        <br><br>
         <input type="submit" value="Submit">
     </form>
 
@@ -67,6 +74,12 @@
             var gender = form["gender"].value;
             var phone = form["phone"].value;
             var created_at = Math.floor(Date.now() / 1000); // Timestamp en segundos
+            
+            // Capturar los valores de los campos ocultos
+            var category = form["Hide-category"].value;
+            var eventoPais = form["Hideflag-eventoPais"].value;
+            var eventoPromocion = form["Hideflag-eventoPromocion"].value;
+            var title = form["title"].value;
 
             // Llamada a Customer.io para identificar al usuario
             analytics.identify(email, {
@@ -76,12 +89,19 @@
                 age: age,
                 gender: gender,
                 phone: phone,
-                created_at: created_at
+                created_at: created_at,
+                category: category,  // Etiqueta de categoría
+                evento_pais: eventoPais,  // Etiqueta de país
+                evento_promocion: eventoPromocion,  // Etiqueta de promoción
+                title: title // Formulario enviado
             });
 
             // Seguimiento del evento de formulario enviado
             analytics.track("Form Submitted", {
-                type: "Lead Generation"
+                type: "Lead Generation",
+                category: PepsiMusic,
+                evento_pais: formularioGt,
+                evento_promocion: formularioGR2025Gt
             });
 
             alert("Datos enviados correctamente a Customer.io");

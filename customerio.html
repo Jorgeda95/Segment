@@ -81,30 +81,46 @@
             var eventoPromocion = form["Hideflag-eventoPromocion"].value;
             var title = form["title"].value;
 
-            // Llamada a Customer.io para identificar al usuario
-            analytics.identify(email, {
-                email: email,
-                first_name: fullname.split(" ")[0] || "",
-                last_name: fullname.split(" ")[1] || "",
-                age: age,
-                gender: gender,
-                phone: phone,
-                created_at: created_at,
-                category: category,  // Etiqueta de categoría
-                evento_pais: eventoPais,  // Etiqueta de país
-                evento_promocion: eventoPromocion,  // Etiqueta de promoción
-                title: title // Formulario enviado
+            console.log("Preparando datos para enviar a Customer.io...");
+            console.log({
+                email, fullname, age, gender, phone, created_at, category, eventoPais, eventoPromocion, title
             });
 
-            // Seguimiento del evento de formulario enviado
-            analytics.track("Form Submitted", {
-                type: "Lead Generation",
-                category: PepsiMusic,
-                evento_pais: formularioGt,
-                evento_promocion: formularioGR2025Gt
-            });
+            try {
+                // Llamada a Customer.io para identificar al usuario
+                analytics.identify(email, {
+                    email: email,
+                    first_name: fullname.split(" ")[0] || "",
+                    last_name: fullname.split(" ")[1] || "",
+                    age: age,
+                    gender: gender,
+                    phone: phone,
+                    created_at: created_at,
+                    category: category,  // Etiqueta de categoría
+                    evento_pais: eventoPais,  // Etiqueta de país
+                    evento_promocion: eventoPromocion,  // Etiqueta de promoción
+                    title: title // Formulario enviado
+                });
 
-            alert("Datos enviados correctamente a Customer.io");
+                console.log("Usuario identificado correctamente en Customer.io");
+
+                // Seguimiento del evento de formulario enviado
+                analytics.track("Form Submitted", {
+                    type: "Lead Generation",
+                    category: category,
+                    evento_pais: eventoPais,
+                    evento_promocion: eventoPromocion
+                });
+
+                console.log("Evento 'Form Submitted' enviado correctamente");
+            } catch (error) {
+                console.error("Error al enviar datos a Customer.io:", error);
+            }
+
+            // Mostrar alerta después de 1 segundo para asegurar ejecución
+            setTimeout(() => {
+                alert("Datos enviados correctamente a Customer.io");
+            }, 1000);
         }
     </script>
 

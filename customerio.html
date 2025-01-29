@@ -1,79 +1,92 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Prueba Customerio<span id="selection-marker-1" class="redactor-selection-marker"></span></title>
+    <title>Prueba Customer.io</title>
 
-<script>
-  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdp.customer.io/v1/analytics-js/snippet/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._writeKey=key;analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.15.3";
-    analytics.load(
-      "7dad5bb97f640f146fd5",
-      // Optional: Set other config here
-      // {
-      //   "integrations": {
-      //     "Customer.io In-App Plugin": {
-      //       siteId: "YOUR_SITE_ID"
-      //     }
-      //   }
-      // }
-    );
-    analytics.page();
-  }}();
-</script>
-  
+    <script>
+        !function(){
+            var analytics=window.analytics=window.analytics||[];
+            if(!analytics.initialize)
+                if(analytics.invoked) 
+                    window.console && console.error && console.error("Snippet included twice.");
+                else {
+                    analytics.invoked=!0;
+                    analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];
+                    analytics.factory=function(e){
+                        return function(){
+                            var t=Array.prototype.slice.call(arguments);
+                            t.unshift(e);
+                            analytics.push(t);
+                            return analytics;
+                        }
+                    };
+                    for(var e=0;e<analytics.methods.length;e++){
+                        var key=analytics.methods[e];
+                        analytics[key]=analytics.factory(key);
+                    }
+                    analytics.load=function(key,e){
+                        var t=document.createElement("script");
+                        t.type="text/javascript";
+                        t.async=!0;
+                        t.src="https://cdp.customer.io/v1/analytics-js/snippet/" + key + "/analytics.min.js";
+                        var n=document.getElementsByTagName("script")[0];
+                        n.parentNode.insertBefore(t,n);
+                        analytics._writeKey=key;
+                        analytics._loadOptions=e;
+                    };
+                    analytics.SNIPPET_VERSION="4.15.3";
+                    analytics.load("7dad5bb97f640f146fd5"); // Tu API Key de Customer.io
+                    analytics.page();
+                }
+        }();
+    </script>
 </head>
+
 <body>
-    <h1>Prueba Segment</h1>
+    <h1>Prueba Customer.io</h1>
     <p>Demo -- Form Submission</p>
+
     <form name="form" onsubmit="identify(event)">
-        <br><br><br> 
-        <br><br> Name: <input name="fullname" size="75" type="text" />
-        <br><br> Age: <input name="age" size="75" type="text" />
-        <br><br> Gender: <input name="gender" size="75" type="text" />
-        <br><br> Email: <input name="email" size="75" type="email" />
-        <br><br> Job Title: <input name="title" size="75" type="text" />
-        <br><br> Company ID: <input name="comp_id" size="75" type="number" />
-        <br><br> Company Name: <input name="comp_name" size="75" type="text" />
-        <br><br> Phone: <input name="phone" size="75" type="text" />
-        <br><br> State: <input name="state" size="75" type="text" />
-        <br><br> Rating: <input name="rating" size="75" type="text" />
-        <br><br> Home City: <input name="home_city" size="75" type="text" />
-        <br><br> Home State: <input name="home_state" size="75" type="text" />
-        <br><br> Home Country: <input name="home_country" size="75" type="text" />
-        <br><br> Home Zip: <input name="home_zip" size="75" type="text" />
-        <br><br> Home Street: <input name="home_street" size="75" type="text" />
-        <br><br>Any other relevant info about your company?
-        <br><br>
-        <textarea cols="81" name="details" rows="10">
-    </textarea>
+        <br><br> Name: <input name="fullname" size="75" type="text" required/>
+        <br><br> Age: <input name="age" size="75" type="text" required/>
+        <br><br> Gender: <input name="gender" size="75" type="text" required/>
+        <br><br> Email: <input name="email" size="75" type="email" required/>
+        <br><br> Phone: <input name="phone" size="75" type="text" required/>
+        <br><br> 
         <input type="submit" value="Submit">
-<!--       <br><br<br><input name="submit" type="submit" value="submit" /> -->
     </form>
-<script type="text/javascript">
-  _cio.identify({
 
-var email = form["email"].value;
-    // Required attributes
-    id: 'user@domain.com',    // Use either cio_id, id, or email.
+    <script type="text/javascript">
+        function identify(event) {
+            event.preventDefault();
+            
+            var form = event.target;
+            var email = form["email"].value;
+            var fullname = form["fullname"].value;
+            var age = form["age"].value;
+            var gender = form["gender"].value;
+            var phone = form["phone"].value;
+            var created_at = Math.floor(Date.now() / 1000); // Timestamp en segundos
 
-    // Strongly recommended attributes
-    created_at: 1339438758,   // Timestamp in your system that represents when
-                              // the user first signed up. You'll want to send it
-                              // as seconds since the epoch.
+            // Llamada a Customer.io para identificar al usuario
+            analytics.identify(email, {
+                email: email,
+                first_name: fullname.split(" ")[0] || "",
+                last_name: fullname.split(" ")[1] || "",
+                age: age,
+                gender: gender,
+                phone: phone,
+                created_at: created_at
+            });
 
-    // Example attributes (you can name attributes what you wish)
-    email: email,
-    first_name: 'John',       // Add any attributes you'd like to use in the email subject or body.
-    last_name: 'Smith',       // First name and last name are shown on people pages.
-    plan_name: 'premium'      // To use the example segments, set this to 'free' or 'premium'.
+            // Seguimiento del evento de formulario enviado
+            analytics.track("Form Submitted", {
+                type: "Lead Generation"
+            });
 
-    
-  _cio.track("watchedIntroVideo");
-  _cio.track("purchased", { price: "23.45" });
-
-
-  });
-</script>
+            alert("Datos enviados correctamente a Customer.io");
+        }
+    </script>
 
 </body>
-
 </html>

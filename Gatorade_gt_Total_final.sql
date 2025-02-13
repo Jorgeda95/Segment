@@ -1,12 +1,17 @@
-SELECT 
+-- Definición de Gatorade_gt_Total_Final
+SELECT  
   email,
   original_timestamp,
   evento_pais,
-  evento_promocion
+  evento_promocion,
+  NULL AS evento_version
 FROM mundo_gatorade_web.formulario_enviado
 WHERE evento_pais = 'formularioGt'
-  -- negación del evento promoción para no generar un duplicado en los registros que se obtuvieron automáticamente
   AND evento_promocion <> 'formularioMaxTott2025Gt'
+  AND NOT (
+        EXTRACT(YEAR FROM original_timestamp) = 2025
+        AND evento_promocion = 'formularioFutbolGt'
+      )
 
 UNION ALL
 
@@ -14,7 +19,8 @@ SELECT
   email,
   original_timestamp,
   evento_pais,
-  'FormularioHome' AS evento_promocion
+  'FormularioHome' AS evento_promocion,
+  NULL AS evento_version
 FROM mundo_gatorade_web.formulario_home_gt
 WHERE evento_pais = 'formularioGt'
 
@@ -24,7 +30,8 @@ SELECT
   email,
   original_timestamp,
   evento_pais,
-  evento_promocion
+  evento_promocion,
+  NULL AS evento_version
 FROM mundo_gatorade_web.formulario21kgt
 
 UNION ALL
@@ -33,7 +40,8 @@ SELECT
   email,
   original_timestamp,
   evento_pais,
-  evento_promocion
+  evento_promocion,
+  NULL AS evento_version
 FROM mundo_gatorade_web.formulario_carreraMaxTott
 
 UNION ALL
@@ -42,18 +50,29 @@ SELECT
   string_field_0 AS email,
   '2024-06-09 16:43:11.026000 UTC' AS original_timestamp,
   'formularioGt' AS evento_pais,
-  string_field_6 AS evento_promocion
+  string_field_6 AS evento_promocion,
+  NULL AS evento_version
 FROM mundo_gatorade_web.formulario5V5Gt
 
 UNION ALL
--- Evento agregado el 12/02/2025
+-- Evento agregado el 12/02/2025 (se incluye el campo evento_version)
 SELECT 
   string_field_4 AS email,
-  -- Nos ayuda a hacer compatible el formato del Timestamp
   PARSE_TIMESTAMP('%F %T', string_field_0) AS original_timestamp, 
   string_field_9 AS evento_pais, 
-  string_field_10 AS evento_promocion 
-FROM mundo_gatorade_web.formularioMaxTottGatorade2025
--- Se incluyen ambas promociones; para "formularioFutbolGt" se filtra adicionalmente por evento_version
+  string_field_10 AS evento_promocion,
+  string_field_12 AS evento_version
+FROM mundo_gatorade_web.formulariosGatorade2025
 WHERE string_field_10 = "formularioMaxTott2025Gt"
-   OR (string_field_10 = "formularioFutbolGt" AND string_field_12 = "Partidos15y16deFebrero")
+
+UNION ALL
+-- Evento agregado el 12/02/2025 (se incluye el campo evento_version)
+SELECT 
+  string_field_4 AS email,
+  PARSE_TIMESTAMP('%F %T', string_field_0) AS original_timestamp, 
+  string_field_9 AS evento_pais, 
+  string_field_10 AS evento_promocion,
+  string_field_12 AS evento_version
+FROM mundo_gatorade_web.formulariosGatorade2025
+WHERE string_field_10 = "formularioFutbolGt" 
+  AND string_field_12 = "Partidos15y16deFebrero"

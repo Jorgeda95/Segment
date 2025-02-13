@@ -75,4 +75,5 @@ SELECT
   string_field_12 AS evento_version
 FROM mundo_gatorade_web.formulariosGatorade2025
 WHERE string_field_10 = "formularioFutbolGt" 
+  --se realiza un filtro para el evento version
   AND string_field_12 = "Partidos15y16deFebrero"

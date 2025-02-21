@@ -1,25 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prueba Customer.io</title>
 
+    <!-- Script de inicialización de Customer.io -->
     <script>
-  !function(){var i="cioanalytics", analytics=(window[i]=window[i]||[]);if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute('data-global-customerio-analytics-key', i);t.src="https://cdp.customer.io/v1/analytics-js/snippet/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._writeKey=key;analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.15.3";
-    analytics.load(
-      "7dad5bb97f640f146fd5",
-      // Optional: Set other config here
-      // {
-      //   "integrations": {
-      //     "Customer.io In-App Plugin": {
-      //       siteId: "YOUR_SITE_ID"
-      //     }
-      //   }
-      // }
-    );
-    analytics.page();
-  }}();
-</script>
-    
+        !function(){var i="cioanalytics", analytics=(window[i]=window[i]||[]);
+        if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Snippet included twice.");
+        else{analytics.invoked=!0;
+            analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];
+            analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};
+            for(var e=0;e<analytics.methods.length;e++){
+                var key=analytics.methods[e];analytics[key]=analytics.factory(key)}
+            analytics.load=function(key,e){
+                var t=document.createElement("script");
+                t.type="text/javascript";t.async=!0;
+                t.setAttribute('data-global-customerio-analytics-key', i);
+                t.src="https://cdp.customer.io/v1/analytics-js/snippet/" + key + "/analytics.min.js";
+                var n=document.getElementsByTagName("script")[0];
+                n.parentNode.insertBefore(t,n);
+                analytics._writeKey=key;analytics._loadOptions=e};
+            analytics.SNIPPET_VERSION="4.15.3";
+
+            analytics.load("7dad5bb97f640f146fd5");
+            analytics.page();
+        }}();
+    </script>
 </head>
 
 <body>
@@ -27,20 +35,20 @@
     <p>Demo -- Form Submission</p>
 
     <form name="form" onsubmit="identify(event)">
-        <br><br> Name: <input name="fullname" size="75" type="text" required/>
-        <br><br> Age: <input name="age" size="75" type="text" required/>
-        <br><br> Gender: <input name="gender" size="75" type="text" required/>
-        <br><br> Email: <input name="email" size="75" type="email" required/>
-        <br><br> Phone: <input name="phone" size="75" type="text" required/>
-        
+        <br><br> Nombre: <input name="fullname" size="75" type="text" required />
+        <br><br> Edad: <input name="age" size="75" type="number" required />
+        <br><br> Género: <input name="gender" size="75" type="text" required />
+        <br><br> Email: <input name="email" size="75" type="email" required />
+        <br><br> Teléfono: <input name="phone" size="75" type="text" required />
+
         <!-- Campos ocultos -->
-        <input class="wpcf7-form-control wpcf7-hidden" value="HinchaPepsi" type="hidden" name="Hide-category" />
-        <input class="wpcf7-form-control wpcf7-hidden" value="formularioGt" type="hidden" name="Hideflag-eventoPais" />
-        <input class="wpcf7-form-control wpcf7-hidden" value="formularioHinchaPepsiGt" type="hidden" name="Hideflag-eventoPromocion" />
-        <input class="wpcf7-form-control wpcf7-hidden" value="formularioEnviado" type="hidden" name="title" />
+        <input type="hidden" name="Hide-category" value="HinchaPepsi" />
+        <input type="hidden" name="Hideflag-eventoPais" value="formularioGt" />
+        <input type="hidden" name="Hideflag-eventoPromocion" value="formularioHinchaPepsiGt" />
+        <input type="hidden" name="title" value="formularioEnviado" />
 
         <br><br>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Enviar">
     </form>
 
     <script type="text/javascript">
@@ -48,11 +56,14 @@
             event.preventDefault();
             
             var form = event.target;
-            var email = form["email"].value;
-            var fullname = form["fullname"].value;
-            var age = form["age"].value;
-            var gender = form["gender"].value;
-            var phone = form["phone"].value;
+            var email = form["email"].value.trim();
+            var fullname = form["fullname"].value.trim();
+            var nameParts = fullname.split(" ");
+            var first_name = nameParts[0] || "";
+            var last_name = nameParts.length > 1 ? nameParts.slice(1).join(" ") : "";
+            var age = isNaN(parseInt(form["age"].value)) ? null : parseInt(form["age"].value);
+            var gender = form["gender"].value.trim();
+            var phone = form["phone"].value.trim();
             var created_at = Math.floor(Date.now() / 1000); // Timestamp en segundos
             
             // Capturar los valores de los campos ocultos
@@ -61,30 +72,39 @@
             var eventoPromocion = form["Hideflag-eventoPromocion"].value;
             var title = form["title"].value;
 
-            // Llamada a Customer.io para identificar al usuario
-            analytics.identify(email, {
-                email: email,
-                first_name: fullname.split(" ")[0] || "",
-                last_name: fullname.split(" ")[1] || "",
-                age: age,
-                gender: gender,
-                phone: phone,
-                created_at: created_at,
-                category: category,  // Etiqueta de categoría
-                evento_pais: eventoPais,  // Etiqueta de país
-                evento_promocion: eventoPromocion,  // Etiqueta de promoción
-                title: title // Formulario enviado
-            });
+            // Verificar que analytics está disponible antes de ejecutarlo
+            if (typeof analytics !== "undefined" && analytics.identify) {
+                analytics.identify(email, {
+                    email: email,
+                    first_name: first_name,
+                    last_name: last_name,
+                    age: age,
+                    gender: gender,
+                    phone: phone,
+                    created_at: created_at,
+                    category: category,  // Etiqueta de categoría
+                    evento_pais: eventoPais,  // Etiqueta de país
+                    evento_promocion: eventoPromocion,  // Etiqueta de promoción
+                    title: title // Formulario enviado
+                });
 
-            // Seguimiento del evento de formulario enviado
-            analytics.track("Form Submitted", {
-                type: "Lead Generation",
-                category: category,
-                evento_pais: eventoPais,
-                evento_promocion: eventoPromocion
-            });
+                // Seguimiento del evento de formulario enviado
+                analytics.track("Form Submitted", {
+                    type: "Lead Generation",
+                    category: category,
+                    evento_pais: eventoPais,
+                    evento_promocion: eventoPromocion
+                });
 
-            alert("Datos enviados correctamente a Customer.io");
+                alert("Datos enviados correctamente a Customer.io");
+
+                // Retraso breve para asegurar que los datos sean enviados antes de redirigir
+                setTimeout(() => {
+                    form.submit();
+                }, 500);
+            } else {
+                console.error("Customer.io no está cargado correctamente");
+            }
         }
     </script>
 
